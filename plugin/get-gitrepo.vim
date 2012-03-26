@@ -29,7 +29,6 @@ if !filereadable(s:get_gitrepo_DefaulTemplate)
 endif
 
 command! GitList call ggr#Template()
-
 command! -nargs=1 GetGitRepo call ggr#GetGitRepo(<f-args>)
 
 exec 'au BufRead '.g:get_gitrepo_DefaultConfigFileTemplate.' call ggr#SetBufMapProjectTemplateFile()'
