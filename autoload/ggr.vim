@@ -6,6 +6,10 @@
 let s:get_gitrepo_TemplateNo = 0
 let s:get_gitrepo_TemplateOpen = 0
 
+if !exists("g:get_gitrepo_delete_files")
+    let g:get_gitrepo_delete_files = ['.git', '.gitignore']
+endif
+
 function ggr#getDirName(repo)
     return matchlist(a:repo, '\v(.*)/(.*)')[2]
 endfunction
@@ -13,6 +17,9 @@ endfunction
 function! ggr#GetGitRepo(repo)
     echo 'Start GetGit:'
     call system('git clone git://github.com/'.a:repo.'.git')
+    for e in g:get_gitrepo_delete_files
+        call system('rm -r '.e)
+    endfor
     echo 'GetGit Done!'
 endfunction
 
