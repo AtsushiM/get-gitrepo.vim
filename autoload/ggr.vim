@@ -17,8 +17,9 @@ endfunction
 function! ggr#GetGitRepo(repo)
     echo 'Start GetGit:'
     call system('git clone git://github.com/'.a:repo.'.git')
+    let dir = ggr#getDirName(a:repo)
     for e in g:get_gitrepo_delete_files
-        call system('rm -r '.e)
+        call system('rm -r '.dir.'/'.e)
     endfor
     echo 'GetGit Done!'
 endfunction
@@ -56,7 +57,7 @@ function! ggr#Init()
 
         let dir = ggr#getDirName(repo)
 
-        exec 'e '.g:get_gitrepo_TemplateBeforePath.'/'.dir
+        exec 'e '.g:get_gitrepo_TemplateBeforePath.'/'.dir.'/..'
     else
         echo 'No before path.'
     endif
