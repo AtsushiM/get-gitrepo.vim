@@ -3,6 +3,9 @@
 "VERSION:  0.9
 "LICENSE:  MIT
 
+let s:save_cpo = &cpo
+set cpo&vim
+
 let s:get_gitrepo_TemplateNo = 0
 let s:get_gitrepo_TemplateOpen = 0
 
@@ -69,3 +72,5 @@ function! ggr#SetBufMapProjectTemplateFile()
     nnoremap <buffer><silent> <CR> :call ggr#Init()<CR>
     nnoremap <buffer><silent> q :call ggr#TemplateClose()<CR>
 endfunction
+
+let &cpo = s:save_cpo

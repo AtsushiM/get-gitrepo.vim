@@ -3,6 +3,14 @@
 "VERSION:  0.9
 "LICENSE:  MIT
 
+if exists("g:loaded_get_gitrepo")
+    finish
+endif
+let g:loaded_get_gitrepo = 1
+
+let s:save_cpo = &cpo
+set cpo&vim
+
 let g:get_gitrepo_PluginDir = expand('<sfile>:p:h:h').'/'
 let g:get_gitrepo_TemplateDir = g:get_gitrepo_PluginDir.'template/'
 let g:get_gitrepo_TemplateBeforePath = ''
@@ -34,3 +42,5 @@ command! -nargs=1 GetGitRepo call ggr#GetGitRepo(<f-args>)
 exec 'au BufRead '.g:get_gitrepo_DefaultConfigFileTemplate.' call ggr#SetBufMapProjectTemplateFile()'
 exec 'au BufWinLeave '.g:get_gitrepo_DefaultConfigFileTemplate.' call ggr#TemplateClose()'
 exec 'au BufReadPre '.g:get_gitrepo_DefaultConfigFileTemplate.' let g:get_gitrepo_TemplateBeforePath = getcwd()'
+
+let &cpo = s:save_cpo
